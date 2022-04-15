@@ -1,10 +1,13 @@
 import './assets/scss/App.scss';
+import { ConfiguratorProvider } from "./context";
 
 function App() {
   return (
-    <div className="App">
-      <h1>test</h1>
-    </div>
+    <ConfiguratorProvider>
+      <div className="App">
+        <h1>test</h1>
+      </div>
+    </ConfiguratorProvider>
   );
 }
 
