@@ -16,6 +16,7 @@ const HomePage = () => {
                   key={character.id}
                   title={character.name}
                   description={character.description}
+                  type={character.type}
                   imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`}/>
               )
             })}

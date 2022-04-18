@@ -26,6 +26,7 @@ const ConfiguratorProvider = ({children}) => {
     useEffect(() => {
         Promise.all([getCharacters()]).then(response => {
             let characters = response[0].data.data.results;
+            characters.forEach(character => character.type = "character");
             console.log(characters, "personajes");
             initData(characters)
         })

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({title, description, imageUrl}) =>{
+const Card = ({title, type, description, imageUrl}) =>{
     return (
         <div className="card-container">
             <div className="card-header">
@@ -9,7 +9,7 @@ const Card = ({title, description, imageUrl}) =>{
                 </div>
             </div>
             <div className="card-body">
-                <h2>{title}</h2>
+                <h2>{title} <small>({type})</small></h2>
                 <p>{description}</p>
             </div>
             <div className="footer">
