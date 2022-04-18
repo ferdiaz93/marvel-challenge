@@ -2,9 +2,11 @@ import axios from "axios";
 import md5 from "md5";
 import { useContext } from "react";
 import { ConfiguratorContext } from "../context";
+import { useNavigate } from 'react-router-dom';
 
 const useCharactersData = () => {
   const [state, setState] = useContext(ConfiguratorContext);
+  const navigate = useNavigate();
 
   //Getters
   const getCharacters = () => state.characters;
@@ -41,12 +43,14 @@ const useCharactersData = () => {
         }
       })
     }).catch(err => {
+      console.log(err);
       setState(prevState => {
         return {
           ...prevState,
           selectedCharacter: null
         }
       })
+      navigate('/');
     })
   }
 

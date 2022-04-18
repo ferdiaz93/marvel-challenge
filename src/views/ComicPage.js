@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import usedComicsData from '../hooks/useComicsData';
 
 const ComicPage = () => {
@@ -7,17 +7,10 @@ const ComicPage = () => {
   const { getSelectedComic, setSelectedComic } = usedComicsData();
 
   const selectedComic = getSelectedComic();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedComic(comic_id);
   }, []);
-
-  useEffect(() => {
-    if(!selectedComic){
-      navigate('/')
-    }
-  });
 
   return (
     <section className="comic-page-container">

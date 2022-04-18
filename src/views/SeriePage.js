@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import usedSeriesData from '../hooks/useSeriesData';
 
 const SeriePage = () => {
@@ -7,17 +7,10 @@ const SeriePage = () => {
   const { getSelectedSerie, setSelectedSerie } = usedSeriesData();
 
   const selectedSerie = getSelectedSerie();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedSerie(serie_id);
   }, [])
-
-  useEffect(() => {
-    if(!selectedSerie){
-      navigate('/')
-    }
-  });
 
   return (
     <section className="comic-page-container">

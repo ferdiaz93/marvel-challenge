@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import useCharactersData from '../hooks/useCharactersData'
 import Card from '../components/Card';
+
+
 const HomePage = () => {
   const { getCharacters } = useCharactersData();
   const characters = getCharacters();

@@ -1,10 +1,12 @@
 import axios from "axios";
 import md5 from "md5";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ConfiguratorContext } from "../context";
 
 const useSeriesData = () => {
   const [state, setState] = useContext(ConfiguratorContext);
+  const navigate = useNavigate();
 
   //Getters
   const getSeries = () => state.comics;
@@ -41,12 +43,14 @@ const useSeriesData = () => {
         }
       })
     }).catch(err => {
+      console.log(err);
       setState(prevState => {
         return {
           ...prevState,
           selectedSerie: null
         }
-      })
+      });
+      navigate('/')
     })
   }
 

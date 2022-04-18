@@ -1,10 +1,12 @@
 import axios from "axios";
 import md5 from "md5";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ConfiguratorContext } from "../context";
 
 const useComicsData = () => {
   const [state, setState] = useContext(ConfiguratorContext);
+  const navigate = useNavigate();
 
   //Getters
   const getComics = () => state.comics;
@@ -38,12 +40,14 @@ const useComicsData = () => {
         }
       })
     }).catch(err => {
+      console.log(err);
       setState(prevState => {
         return {
           ...prevState,
           selectedComic: null
         }
       })
+      navigate('/');
     })
   }
 
