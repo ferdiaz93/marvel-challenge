@@ -14,6 +14,7 @@ const HomePage = () => {
               return (
                 <Card 
                   key={character.id}
+                  id={character.id}
                   title={character.name}
                   description={character.description}
                   type={character.type}

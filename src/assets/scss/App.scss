@@ -1,9 +1,12 @@
-
+// main
 @import './variables';
 @import './general';
 
 // components
 @import './components/card';
 @import './components/search';
+
 //views
-@import './views/homepage'
+@import './views/homepage';
+@import './views/characterpage';
+@import './views/comicpage';
