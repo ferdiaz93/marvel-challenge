@@ -1,0 +1,12 @@
+.homepage-container{
+    margin-top: 50px;
+    .homepage-wrapper{
+        .characters-grid{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            column-gap: 30px;
+            row-gap: 50px;
+        }
+    }
+}

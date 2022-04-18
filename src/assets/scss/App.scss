@@ -1,2 +1,9 @@
-.App {
-}
+
+@import './variables';
+@import './general';
+
+// components
+@import './components/card';
+@import './components/search';
+//views
+@import './views/homepage'

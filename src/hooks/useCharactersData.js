@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import {  ConfiguratorContext } from "../context";
-import useFinanciadoData from './useFinanciadoData';
 
 const useCharactersData = () => {
     const [state, setState] = useContext(ConfiguratorContext);
@@ -13,4 +12,4 @@ const useCharactersData = () => {
     }
 }
 
-export default useAccessoriesData;
+export default useCharactersData;
