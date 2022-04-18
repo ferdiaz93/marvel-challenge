@@ -37,6 +37,13 @@ const useComicsData = () => {
           }
         }
       })
+    }).catch(err => {
+      setState(prevState => {
+        return {
+          ...prevState,
+          selectedComic: null
+        }
+      })
     })
   }
 

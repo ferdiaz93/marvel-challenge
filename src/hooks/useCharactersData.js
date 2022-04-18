@@ -40,6 +40,13 @@ const useCharactersData = () => {
           }
         }
       })
+    }).catch(err => {
+      setState(prevState => {
+        return {
+          ...prevState,
+          selectedCharacter: null
+        }
+      })
     })
   }
 

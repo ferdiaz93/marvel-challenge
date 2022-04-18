@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import useCharactersData from '../hooks/useCharactersData';
 
 
@@ -8,10 +8,18 @@ const CharacterPage = () => {
   const { getSelectedCharacter, setSelectedCharacter } = useCharactersData();
 
   const selectedCharacter = getSelectedCharacter();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(character_id, "ID");
     setSelectedCharacter(character_id);
   }, [])
+  
+  useEffect(() => {
+    if(!selectedCharacter){
+      navigate('/')
+    }
+  })
 
   return (
     <section className="character-page-container">
