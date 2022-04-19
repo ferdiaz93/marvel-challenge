@@ -12,7 +12,7 @@ const useComicsData = () => {
   const getComics = () => state.comics;
   const getSelectedComic = () => state.selectedComic;
   const getFavoritesComics = () => JSON.parse(localStorage.getItem('favorites_comics'));
-  
+
   //setters
   const setSelectedComic = (id) => {
     const getComic = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}?${apiParameters()}`);
@@ -49,10 +49,14 @@ const useComicsData = () => {
   }
 
   const setComics = (inputValue) => {
+    let favoritesSaved = JSON.parse(localStorage.getItem('favorites_comics'));
     const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/comics?titleStartsWith=${inputValue}&${apiParameters()}`);
     getComics().then(response => {
       let comics = response.data.data.results;
-      comics.forEach(comic => comic.type = "comic");
+      comics.forEach(comic => {
+        comic.type = "comic";
+        comic.favorite = favoritesSaved.some(fav => fav.id == comic.id);
+      });
       setState((prevState)=> {
         return{
           ...prevState,
@@ -76,6 +80,16 @@ const useComicsData = () => {
     } else {
       favoritesSaved.push(comic);
     }
+    let comics = state.comics;
+    comics.forEach(com =>{
+      if(comic.id == com.id) com.favorite = !com.favorite
+    })
+    setState(prevState => {
+      return {
+        ...prevState,
+        comics: [...comics]
+      }
+    })
     localStorage.setItem('favorites_comics', JSON.stringify(favoritesSaved));
   }
 

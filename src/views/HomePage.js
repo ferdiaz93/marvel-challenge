@@ -20,7 +20,7 @@ const HomePage = () => {
                   title={character.name}
                   description={character.description}
                   type={character.type}
-                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`}/>
+                  imageUrl={`${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}`}/>
               )
             })}
           </div>

@@ -30,6 +30,7 @@ const CharactersPage = () => {
                   title={character.name}
                   description={character.description}
                   type={character.type}
+                  favorite={character.favorite}
                   imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`}/>
               )
             })}

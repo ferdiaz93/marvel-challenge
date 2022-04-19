@@ -30,7 +30,8 @@ const ComicsPage = () => {
                   description={comic.description}
                   type={comic.type}
                   imageUrl={`${comic.thumbnail.path}/landscape_xlarge.${comic.thumbnail.extension}`}
-                  fullItem={comic}/>
+                  fullItem={comic}
+                  favorite={comic.favorite}/>
               )
             })}
           </div>
