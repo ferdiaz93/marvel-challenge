@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
-import md5 from 'md5'
+import { apiParameters } from "./utils";
 
 const initialContext = {
   loading: true,
   selectedCharacter: null,
   selectedComic: null,
-  selectedStory: null,
   selectedSerie: null,
   characters: [],
   comics: [],
@@ -20,20 +19,12 @@ const ConfiguratorContext = React.createContext();
 
 const ConfiguratorProvider = ({ children }) => {
   const [state, setState] = useState(initialContext);
-  let milliseconds = Number(new Date());
-  let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
-  let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
-
-  const getCharacters = () => Axios.get(`${process.env.REACT_APP_API_URL}/characters?${apiParameters}`);
-  const getComics = () => Axios.get(`${process.env.REACT_APP_API_URL}/comics?${apiParameters}`);
-  const getSeries = () => Axios.get(`${process.env.REACT_APP_API_URL}/series?${apiParameters}`);
-  const getStories = () => Axios.get(`${process.env.REACT_APP_API_URL}/stories?${apiParameters}`);
+  const getCharacters = () => Axios.get(`${process.env.REACT_APP_API_URL}/characters?${apiParameters()}`);
 
   useEffect(() => {
-    Promise.all([getCharacters()]).then(response => {
-      let characters = response[0].data.data.results;
+    getCharacters().then(response => {
+      let characters = response.data.data.results;
       characters.forEach(character => character.type = "character");
-      console.log(characters, "personajes");
       initData(characters)
     })
       .catch(error => {
@@ -47,7 +38,7 @@ const ConfiguratorProvider = ({ children }) => {
       })
   }, [])
 
-  const initData = (characters, comics, series, stories) => {
+  const initData = (characters) => {
     setState(prevstate => {
       return {
         ...prevstate,

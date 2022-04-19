@@ -1,8 +1,8 @@
 import axios from "axios";
-import md5 from "md5";
 import { useContext } from "react";
 import { ConfiguratorContext } from "../context";
 import { useNavigate } from 'react-router-dom';
+import { apiParameters } from "../utils";
 
 const useCharactersData = () => {
   const [state, setState] = useContext(ConfiguratorContext);
@@ -14,14 +14,10 @@ const useCharactersData = () => {
 
   //setters
   const setSelectedCharacter = (id) => {
-    let milliseconds = Number(new Date());
-    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
-    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
-
-    const getCharacter = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}?${apiParameters}`);
-    const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}/comics?${apiParameters}`);
-    const getStories = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}/stories?${apiParameters}`);
-    const getSeries = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}/series?${apiParameters}`);
+    const getCharacter = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}?${apiParameters()}`);
+    const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}/comics?${apiParameters()}`);
+    const getStories = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}/stories?${apiParameters()}`);
+    const getSeries = () => axios.get(`${process.env.REACT_APP_API_URL}/characters/${id}/series?${apiParameters()}`);
 
     Promise.all([getCharacter(), getComics(), getStories(), getSeries()]).then(response => {
       const character = response[0].data.data.results[0];
@@ -55,13 +51,8 @@ const useCharactersData = () => {
   }
 
   const setCharacters = (inputValue) => {
-    let milliseconds = Number(new Date());
-    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
-    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
-
-    const getCharacters = () => axios.get(`${process.env.REACT_APP_API_URL}/characters?nameStartsWith=${inputValue}&${apiParameters}`);
+    const getCharacters = () => axios.get(`${process.env.REACT_APP_API_URL}/characters?nameStartsWith=${inputValue}&${apiParameters()}`);
     getCharacters().then(response => {
-      console.log(response);
       let characters = response.data.data.results;
       characters.forEach(character => character.type = "character");
       setState((prevState)=> {

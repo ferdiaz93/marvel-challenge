@@ -1,8 +1,8 @@
 import axios from "axios";
-import md5 from "md5";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfiguratorContext } from "../context";
+import { apiParameters } from "../utils";
 
 const useComicsData = () => {
   const [state, setState] = useContext(ConfiguratorContext);
@@ -14,13 +14,9 @@ const useComicsData = () => {
 
   //setters
   const setSelectedComic = (id) => {
-    let milliseconds = Number(new Date());
-    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
-    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
-
-    const getComic = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}?${apiParameters}`);
-    const getCharacters = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}/characters?${apiParameters}`);
-    const getStories = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}/stories?${apiParameters}`);
+    const getComic = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}?${apiParameters()}`);
+    const getCharacters = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}/characters?${apiParameters()}`);
+    const getStories = () => axios.get(`${process.env.REACT_APP_API_URL}/comics/${id}/stories?${apiParameters()}`);
 
     Promise.all([getComic(), getCharacters(), getStories()]).then(response => {
       const comic = response[0].data.data.results[0];
@@ -52,13 +48,8 @@ const useComicsData = () => {
   }
 
   const setComics = (inputValue) => {
-    let milliseconds = Number(new Date());
-    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
-    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
-
-    const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/comics?titleStartsWith=${inputValue}&${apiParameters}`);
+    const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/comics?titleStartsWith=${inputValue}&${apiParameters()}`);
     getComics().then(response => {
-      console.log(response);
       let comics = response.data.data.results;
       comics.forEach(comic => comic.type = "comic");
       setState((prevState)=> {
