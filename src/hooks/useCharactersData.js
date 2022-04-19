@@ -11,6 +11,7 @@ const useCharactersData = () => {
   //Getters
   const getCharacters = () => state.characters;
   const getSelectedCharacter = () => state.selectedCharacter;
+  const getFavoritesCharacters = () => JSON.parse(localStorage.getItem('favorites_characters'));
 
   //setters
   const setSelectedCharacter = (id) => {
@@ -71,11 +72,23 @@ const useCharactersData = () => {
     })
   }
 
+  const setFavoritesCharacters = (character) => {
+    let favoritesSaved = JSON.parse(localStorage.getItem('favorites_characters'));
+    if(favoritesSaved.some(fav => fav.id === character.id)){
+      favoritesSaved = favoritesSaved.filter(fav => fav.id !== character.id);
+    } else {
+      favoritesSaved.push(character);
+    }
+    localStorage.setItem('favorites_characters', JSON.stringify(favoritesSaved));
+  }
+
   return {
     getCharacters,
     getSelectedCharacter,
     setSelectedCharacter,
-    setCharacters
+    setCharacters,
+    setFavoritesCharacters,
+    getFavoritesCharacters
   }
 }
 

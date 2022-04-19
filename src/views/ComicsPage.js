@@ -21,15 +21,16 @@ const ComicsPage = () => {
       <section className="homepage-container">
         <div className="homepage-content wrapper">
           <div className="characters-grid">
-            {comics.map(character => {
+            {comics.map(comic => {
               return (
                 <Card
-                  key={character.id}
-                  id={character.id}
-                  title={character.title}
-                  description={character.description}
-                  type={character.type}
-                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`} />
+                  key={comic.id}
+                  id={comic.id}
+                  title={comic.title}
+                  description={comic.description}
+                  type={comic.type}
+                  imageUrl={`${comic.thumbnail.path}/landscape_xlarge.${comic.thumbnail.extension}`}
+                  fullItem={comic}/>
               )
             })}
           </div>

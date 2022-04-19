@@ -5,7 +5,7 @@ import useCharactersData from '../hooks/useCharactersData';
 
 
 const CharactersPage = () => {
-  const { getCharacters, setCharacters } = useCharactersData();
+  const { getCharacters, setCharacters, setNewFavoriteCharacter } = useCharactersData();
   const { getInputSearchValue } = useSearchData();
   const characters = getCharacters();
   const inputSearchValue = getInputSearchValue();
@@ -26,10 +26,11 @@ const CharactersPage = () => {
                 <Card
                   key={character.id}
                   id={character.id}
+                  fullItem={character}
                   title={character.name}
                   description={character.description}
                   type={character.type}
-                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`} />
+                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`}/>
               )
             })}
           </div>

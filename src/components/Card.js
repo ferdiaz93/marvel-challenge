@@ -1,8 +1,17 @@
 import React from 'react'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import useCharactersData from '../hooks/useCharactersData';
+import useComicsData from '../hooks/useComicsData';
 
-const Card = ({ title, type, id, favorite, description, imageUrl }) => {
+const Card = ({ title, type, id, favorite, description, imageUrl, fullItem }) => {
+  const { setFavoritesCharacters } = useCharactersData();
+  const { setFavoritesComics } = useComicsData();
+
+  const toggleFavorite = () => {
+    if(type == 'character') setFavoritesCharacters(fullItem)
+    if(type == 'comic') setFavoritesComics(fullItem)
+  }
   return (
     <div className="card-container">
       <div className="card-header">
@@ -14,9 +23,13 @@ const Card = ({ title, type, id, favorite, description, imageUrl }) => {
         <div className="title-container">
           <h2>{title} <small>({type})</small></h2>
           {favorite ? 
-            <FavoriteIcon/> 
+            <a onClick={toggleFavorite}>
+              <FavoriteIcon/> 
+            </a>
             :
-            <FavoriteBorderIcon />
+            <a onClick={toggleFavorite}>
+              <FavoriteBorderIcon />
+            </a>
           }
         </div>
         <p>{description}</p>

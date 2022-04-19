@@ -22,6 +22,12 @@ const ConfiguratorProvider = ({ children }) => {
   const getCharacters = () => Axios.get(`${process.env.REACT_APP_API_URL}/characters?${apiParameters()}`);
 
   useEffect(() => {
+    if(!localStorage.getItem("favorites_characters")){
+      localStorage.setItem('favorites_characters', JSON.stringify([]));
+    }
+    if(!localStorage.getItem("favorites_comics")){
+      localStorage.setItem('favorites_comics', JSON.stringify([]));
+    }
     getCharacters().then(response => {
       let characters = response.data.data.results;
       characters.forEach(character => character.type = "character");
