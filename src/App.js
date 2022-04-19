@@ -20,13 +20,11 @@ import FavoritesPage from './views/FavoritesPage';
     <BrowserRouter>
       <ConfiguratorProvider>
         <header>
-          <a href='/'>
+          <a className="marvel-logo" href='/'>
             <img src={logo}/>
           </a>
           <Search />
-          <div>
-            <a href='/favorites'>Favorites</a>
-          </div>
+          <a className="button favorite-button" href='/favorites'>See Favorites</a>
         </header>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
