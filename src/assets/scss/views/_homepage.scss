@@ -1,0 +1,21 @@
+.homepage-container{
+    margin-top: 50px;
+    .homepage-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: center;
+        height: 600px;
+        h1{
+            font-size: 54px;
+            text-align: center;
+        }
+        .characters-grid{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            column-gap: 30px;
+            row-gap: 50px;
+        }
+    }
+}

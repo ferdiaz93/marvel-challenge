@@ -1,2 +1,18 @@
-.App {
-}
+// main
+@import './variables';
+@import './general';
+
+// components
+@import './components/card';
+@import './components/deletedcard';
+@import './components/search';
+
+//views
+@import './views/homepage';
+@import './views/characterpage';
+@import './views/characterspage';
+@import './views/comicpage';
+@import './views/comicspage';
+@import './views/favoritespage';
+@import './views/seriespage';
+@import './views/deletespage';

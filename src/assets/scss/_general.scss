@@ -1,0 +1,77 @@
+p {
+    font-family: $primary-font !important;
+    line-height: 24px;
+}
+
+button,
+button:focus {
+    outline: none;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+button:active {
+    outline: none;
+    background: transparent;
+    border: 1px solid grey;
+}
+
+.button {
+    cursor: pointer;
+    font-family: $secondary-font;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    background: #4D43F5;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+
+    @media (min-width: $screen-md) {
+        padding: 16px 32px;
+    }
+
+    &.add {
+        background: #f48fb1;
+    }
+
+    &.remove {
+        background: red;
+    }
+}
+
+.wrapper {
+    padding: 0px 25px;
+
+    @media (min-width: $screen-md) {
+        padding: 0px 100px 0px 100px;
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    @media (min-width: $screen-md) {
+        flex-direction: row;
+    }
+
+    .marvel-logo {
+        img {
+            width: 200px;
+        }
+    }
+
+    .favorite-button{
+        margin-top: 10px;
+        @media (min-width: $screen-md) {
+            margin-top: 0px;
+        }
+    }
+
+}

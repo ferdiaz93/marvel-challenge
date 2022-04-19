@@ -1,0 +1,12 @@
+.comicspage-container{
+    margin-top: 50px;
+    .comicspage-content{
+        .grid{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            column-gap: 30px;
+            row-gap: 50px;
+        }
+    }
+}
