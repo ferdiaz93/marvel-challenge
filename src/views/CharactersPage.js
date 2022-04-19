@@ -19,6 +19,7 @@ const CharactersPage = () => {
     setResponseMessage(null);
     setLoading(true);
     let favoritesSaved = JSON.parse(localStorage.getItem('favorites_characters'));
+    let removedCharacters = JSON.parse(localStorage.getItem('removed_characters'));
     setCharacters(inputSearchValue);
     axios.get(`${process.env.REACT_APP_API_URL}/characters?${inputSearchValue ? "nameStartsWith="+inputSearchValue+"&" : ""}${apiParameters()}`)
     .then(response => {
@@ -27,6 +28,7 @@ const CharactersPage = () => {
         character.type = "character";
         character.favorite = favoritesSaved.some(fav => fav.id == character.id);
       });
+      charactersResponse = charactersResponse.filter(charac => !removedCharacters.some(rem => rem.id == charac.id));
       setCharacters(charactersResponse);
       if(charactersResponse.length === 0){
         setResponseMessage('No results')

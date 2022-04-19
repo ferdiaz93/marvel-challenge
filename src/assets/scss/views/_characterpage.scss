@@ -22,6 +22,16 @@
             img{
                 border-radius: 5px;
             }
+            .details{
+                .title-container{
+                    display: flex;
+                    column-gap: 30px;
+                    .buttons-container{
+                        display: flex;
+                        column-gap: 15px;
+                    }
+                }
+            }
         }
     }
 }

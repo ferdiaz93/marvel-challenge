@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import useCharactersData from '../hooks/useCharactersData';
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const CharacterPage = () => {
   const { character_id } = useParams();
-  const { getSelectedCharacter, setSelectedCharacter } = useCharactersData();
+  const { getSelectedCharacter, setSelectedCharacter, setRemovedCharacters } = useCharactersData();
 
   const selectedCharacter = getSelectedCharacter();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedCharacter(character_id);
   }, [])
   
+  const removeCharacter = () => {
+    setRemovedCharacters(selectedCharacter);
+    navigate('/characters')
+  }
+
   return (
     <section className="character-page-container">
       {selectedCharacter?.info ?
@@ -25,8 +32,14 @@ const CharacterPage = () => {
           <div className="body wrapper">
             <div className="content">
               <img src={`${selectedCharacter.info.thumbnail.path}/portrait_incredible.${selectedCharacter.info.thumbnail.extension}`}></img>
-              <div>
-                <h2>Description</h2>
+              <div className="details">
+                <div className="title-container">
+                  <h2>Description</h2>
+                  <div className="buttons-container">
+                    <button className="button edit"><EditIcon></EditIcon></button>
+                    <button className="button remove" onClick={removeCharacter}><DeleteIcon></DeleteIcon></button>
+                  </div>
+                </div>
                 <p>{selectedCharacter.info.description}</p>
               </div>
             </div>

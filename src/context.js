@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios';
-import { apiParameters } from "./utils";
 
 const initialContext = {
   loading: true,
@@ -29,6 +27,9 @@ const ConfiguratorProvider = ({ children }) => {
     }
     if(!localStorage.getItem("favorites_series")){
       localStorage.setItem('favorites_series', JSON.stringify([]));
+    }
+    if(!localStorage.getItem("removed_characters")){
+      localStorage.setItem('removed_characters', JSON.stringify([]));
     }
   }, [])
 

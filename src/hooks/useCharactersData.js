@@ -79,6 +79,12 @@ const useCharactersData = () => {
     })
     localStorage.setItem('favorites_characters', JSON.stringify(favoritesSaved));
   }
+  
+  const setRemovedCharacters = (character) => {
+    let removedCharacters = JSON.parse(localStorage.getItem('removed_characters'));
+    removedCharacters.push(character);
+    localStorage.setItem('removed_characters', JSON.stringify(removedCharacters));
+  }
 
   return {
     getCharacters,
@@ -86,7 +92,8 @@ const useCharactersData = () => {
     setSelectedCharacter,
     setCharacters,
     setFavoritesCharacters,
-    getFavoritesCharacters
+    getFavoritesCharacters,
+    setRemovedCharacters
   }
 }
 
