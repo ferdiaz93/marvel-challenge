@@ -1,6 +1,14 @@
 .homepage-container{
     margin-top: 50px;
     .homepage-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-position: center;
+        height: 600px;
+        h1{
+            font-size: 54px;
+        }
         .characters-grid{
             display: flex;
             flex-wrap: wrap;

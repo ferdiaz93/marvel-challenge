@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useCharactersData from '../hooks/useCharactersData'
 import Card from '../components/Card';
+import background from '../assets/images/marvel_background.jpg'
 
 
 const HomePage = () => {
@@ -10,20 +11,10 @@ const HomePage = () => {
   return (
     <>
       <section className="homepage-container">
-        <div className="homepage-content wrapper">
-          <div className="characters-grid">
-            {characters.map(character => {
-              return (
-                <Card 
-                  key={character.id}
-                  id={character.id}
-                  title={character.name}
-                  description={character.description}
-                  type={character.type}
-                  imageUrl={`${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}`}/>
-              )
-            })}
-          </div>
+        <div className="homepage-content"
+        style={{ 
+          backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 100%), url(${background})` }}>
+            <h1>Marvel Challenge</h1>
         </div>
       </section>
     </>

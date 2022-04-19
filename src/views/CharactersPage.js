@@ -18,9 +18,9 @@ const CharactersPage = () => {
 
   return (
     <>
-      <section className="homepage-container">
-        <div className="homepage-content wrapper">
-          <div className="characters-grid">
+      <section className="characterspage-container">
+        <div className="characterspage-content wrapper">
+          <div className="grid">
             {characters.map(character => {
               return (
                 <Card
