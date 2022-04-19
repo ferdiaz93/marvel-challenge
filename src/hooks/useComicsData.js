@@ -48,28 +48,12 @@ const useComicsData = () => {
     })
   }
 
-  const setComics = (inputValue) => {
-    let favoritesSaved = JSON.parse(localStorage.getItem('favorites_comics'));
-    const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/comics?titleStartsWith=${inputValue}&${apiParameters()}`);
-    getComics().then(response => {
-      let comics = response.data.data.results;
-      comics.forEach(comic => {
-        comic.type = "comic";
-        comic.favorite = favoritesSaved.some(fav => fav.id == comic.id);
-      });
-      setState((prevState)=> {
-        return{
-          ...prevState,
-          comics: response.data.data.results
-        }
-      })
-    })
-    .catch(err => {
-      setState(prevState => {
-        return {
-          ...prevState
-        }
-      })
+  const setComics = (comics) => {
+    setState(prevState => {
+      return{
+        ...prevState,
+        comics: [...comics]
+      }
     })
   }
 

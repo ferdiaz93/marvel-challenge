@@ -15,6 +15,10 @@
         .content{
             display: flex;
             column-gap: 40px;
+            flex-direction: column;
+            @media (min-width: $screen-md) {
+                flex-direction: row;
+            }
             img{
                 border-radius: 5px;
             }

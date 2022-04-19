@@ -51,28 +51,12 @@ const useCharactersData = () => {
     })
   }
 
-  const setCharacters = (inputValue) => {
-    let favoritesSaved = JSON.parse(localStorage.getItem('favorites_characters'));
-    const getCharacters = () => axios.get(`${process.env.REACT_APP_API_URL}/characters?nameStartsWith=${inputValue}&${apiParameters()}`);
-    getCharacters().then(response => {
-      let characters = response.data.data.results;
-      characters.forEach(character => {
-        character.type = "character";
-        character.favorite = favoritesSaved.some(fav => fav.id == character.id);
-      });
-      setState((prevState)=> {
-        return{
-          ...prevState,
-          characters: response.data.data.results
-        }
-      })
-    })
-    .catch(err => {
-      setState(prevState => {
-        return {
-          ...prevState
-        }
-      })
+  const setCharacters = (characters) => {
+    setState(prevState => {
+      return{
+        ...prevState,
+        characters: [...characters]
+      }
     })
   }
 

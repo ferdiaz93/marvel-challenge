@@ -11,6 +11,7 @@ const useSeriesData = () => {
   //Getters
   const getSeries = () => state.series;
   const getSelectedSerie = () => state.selectedSerie;
+  const getFavoritesSeries = () => JSON.parse(localStorage.getItem('favorites_series'));
 
   //setters
   const setSelectedSerie = (id) => {
@@ -50,32 +51,42 @@ const useSeriesData = () => {
     })
   }
 
-  const setSeries = (inputValue) => {
-    const getSeries = () => axios.get(`${process.env.REACT_APP_API_URL}/series?titleStartsWith=${inputValue}&${apiParameters()}`);
-    getSeries().then(response => {
-      let series = response.data.data.results;
-      series.forEach(character => character.type = "serie");
-      setState((prevState)=> {
-        return{
-          ...prevState,
-          series: response.data.data.results
-        }
-      })
+  const setSeries = (series) => {
+    setState(prevState => {
+      return{
+        ...prevState,
+        series: [...series]
+      }
     })
-    .catch(err => {
-      setState(prevState => {
-        return {
-          ...prevState
-        }
-      })
+  }
+
+  const setFavoritesSeries = (serie) => {
+    let favoritesSaved = JSON.parse(localStorage.getItem('favorites_series'));
+    if(favoritesSaved.some(fav => fav.id === serie.id)){
+      favoritesSaved = favoritesSaved.filter(fav => fav.id !== serie.id);
+    } else {
+      favoritesSaved.push(serie);
+    }
+    let series = state.series;
+    series.forEach(ser =>{
+      if(serie.id == ser.id) ser.favorite = !ser.favorite
     })
+    setState(prevState => {
+      return {
+        ...prevState,
+        series: [...series]
+      }
+    })
+    localStorage.setItem('favorites_series', JSON.stringify(favoritesSaved));
   }
 
   return {
     getSeries,
     getSelectedSerie,
     setSelectedSerie,
-    setSeries
+    setSeries,
+    setFavoritesSeries,
+    getFavoritesSeries
   }
 }
 

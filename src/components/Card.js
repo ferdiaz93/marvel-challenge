@@ -1,14 +1,17 @@
 import React from 'react'
 import useCharactersData from '../hooks/useCharactersData';
 import useComicsData from '../hooks/useComicsData';
+import useSeriesData from '../hooks/useSeriesData';
 
 const Card = ({ title, type, id, favorite, description, imageUrl, fullItem }) => {
   const { setFavoritesCharacters } = useCharactersData();
   const { setFavoritesComics } = useComicsData();
+  const { setFavoritesSeries } = useSeriesData();
 
   const toggleFavorite = () => {
     if (type === 'character') setFavoritesCharacters(fullItem)
     if (type === 'comic') setFavoritesComics(fullItem)
+    if (type === 'serie') setFavoritesSeries(fullItem)
   }
   return (
     <div className="card-container">
