@@ -16,7 +16,7 @@ const DeletesPage = () => {
     <>
       <section className="deletes-container">
         <div className="deletes-content wrapper">
-          <h1>Characters</h1>
+          <h1>Deleted Characters</h1>
           <div className="characters grid">
             {deletedCharacters?.length ?
               deletedCharacters?.map(character => {

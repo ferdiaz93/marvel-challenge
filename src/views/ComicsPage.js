@@ -43,6 +43,7 @@ const ComicsPage = () => {
     <>
       <section className="comicspage-container">
         <div className="comicspage-content wrapper">
+        <h1>Comics found {inputSearchValue ? `with "${inputSearchValue}"` : ""}</h1>
           <div className="grid">
             {loading ? 
               <>

@@ -42,6 +42,7 @@ const SeriesPage = () => {
     <>
       <section className="seriespage-container">
         <div className="seriespage-content wrapper">
+        <h1>Series found {inputSearchValue ? `with "${inputSearchValue}"` : ""}</h1>
           <div className="grid">
             {loading ?
               <>

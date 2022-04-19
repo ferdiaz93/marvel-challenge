@@ -45,6 +45,7 @@ const CharactersPage = () => {
     <>
       <section className="characterspage-container">
         <div className="characterspage-content wrapper">
+          <h1>Characters found {inputSearchValue ? `with "${inputSearchValue}"` : ""}</h1>
           <div className="grid">
             {loading ? 
               <>

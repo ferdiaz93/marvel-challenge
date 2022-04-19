@@ -21,7 +21,7 @@ const FavoritesPage = () => {
     <>
       <section className="favorites-container">
         <div className="favorites-content wrapper">
-          <h1>Characters</h1>
+          <h1>Favorites Characters</h1>
           <div className="characters grid">
             {favoritesCharacters.length ? 
               favoritesCharacters?.map(character => {
@@ -41,7 +41,7 @@ const FavoritesPage = () => {
               <h3>You didn't added characters to favorites</h3>
             }
           </div>
-          <h1>Comics</h1>
+          <h1>Favorites Comics</h1>
           <div className="comics grid">
             {favoritesComics.length ? 
               favoritesComics.map(comic => {
@@ -61,7 +61,7 @@ const FavoritesPage = () => {
               <h3>You didn't added comics to favorites</h3>
             }
           </div>
-          <h1>Series</h1>
+          <h1>Favorites Series</h1>
           <div className="comics grid">
             {favoritesSeries.length ? 
               favoritesSeries.map(comic => {
