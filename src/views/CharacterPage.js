@@ -39,7 +39,6 @@ const CharacterPage = () => {
                 <div className="title-container">
                   <h2>Description</h2>
                   <div className="buttons-container">
-                    <button className="button edit"><EditIcon></EditIcon></button>
                     <button className="button remove" onClick={removeCharacter}><DeleteIcon></DeleteIcon></button>
                   </div>
                 </div>
