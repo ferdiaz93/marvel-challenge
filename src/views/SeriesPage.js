@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import useSearchData from '../hooks/useSearchData'
 import Card from '../components/Card';
-import useComicsData from '../hooks/useComicsData';
+import useSeriesData from '../hooks/useSeriesData';
 
 
-const ComicsPage = () => {
-  const { getComics, setComics } = useComicsData();
+const SeriesPage = () => {
+  const { getSeries, setSeries } = useSeriesData();
   const { getInputSearchValue } = useSearchData();
-  const comics = getComics();
+  const series = getSeries();
   const inputSearchValue = getInputSearchValue();
 
   useEffect(() => {
     if (inputSearchValue) {
-      setComics(inputSearchValue);
+      setSeries(inputSearchValue);
     }
   }, [inputSearchValue])
 
@@ -21,15 +21,15 @@ const ComicsPage = () => {
       <section className="homepage-container">
         <div className="homepage-content wrapper">
           <div className="characters-grid">
-            {comics.map(character => {
+            {series.map(serie => {
               return (
                 <Card
-                  key={character.id}
-                  id={character.id}
-                  title={character.title}
-                  description={character.description}
-                  type={character.type}
-                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`} />
+                  key={serie.id}
+                  id={serie.id}
+                  title={serie.title}
+                  description={serie.description}
+                  type={serie.type}
+                  imageUrl={`${serie.thumbnail.path}/landscape_xlarge.${serie.thumbnail.extension}`} />
               )
             })}
           </div>
@@ -39,4 +39,4 @@ const ComicsPage = () => {
   )
 }
 
-export default ComicsPage;
+export default SeriesPage;

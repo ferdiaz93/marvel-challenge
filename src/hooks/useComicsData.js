@@ -60,7 +60,7 @@ const useComicsData = () => {
     getComics().then(response => {
       console.log(response);
       let comics = response.data.data.results;
-      comics.forEach(comic => comic.type = "comics");
+      comics.forEach(comic => comic.type = "comic");
       setState((prevState)=> {
         return{
           ...prevState,

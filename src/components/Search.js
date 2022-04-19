@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useSearchData from '../hooks/useSearchData';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,8 +8,13 @@ const Search = () => {
   const selectSearchValue = getSelectSearchValue();
   const navigate = useNavigate();
 
-  const [ inputText , setInputText] = useState(inputSearchValue);
-  const [ selectValue , setSelectValue] = useState(selectSearchValue);
+  const [ inputText , setInputText] = useState("");
+  const [ selectValue , setSelectValue] = useState("");
+
+  useEffect(()=> {
+    setInputText(inputSearchValue)
+    setSelectValue(selectSearchValue)
+  }, [inputSearchValue, selectSearchValue])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,11 +36,10 @@ const Search = () => {
       <div><input type="text" value={inputText} onChange={handleInput} /></div>
       <div>
         <label htmlFor="types">Choose:</label>
-        <select name="types" id="types" value={selectSearchValue} onChange={handleSelect}>
+        <select name="types" id="types" value={selectValue} onChange={handleSelect}>
           <option value="characters">Characters</option>
           <option value="comics">Comics</option>
-          <option value="stories">Stories</option>
-          <option value="serie">Series</option>
+          <option value="series">Series</option>
         </select>
       </div>
       <div>

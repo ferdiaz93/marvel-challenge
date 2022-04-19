@@ -9,7 +9,7 @@ const useSeriesData = () => {
   const navigate = useNavigate();
 
   //Getters
-  const getSeries = () => state.comics;
+  const getSeries = () => state.series;
   const getSelectedSerie = () => state.selectedSerie;
 
   //setters
@@ -54,10 +54,37 @@ const useSeriesData = () => {
     })
   }
 
+  const setSeries = (inputValue) => {
+    let milliseconds = Number(new Date());
+    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
+    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
+
+    const getSeries = () => axios.get(`${process.env.REACT_APP_API_URL}/series?titleStartsWith=${inputValue}&${apiParameters}`);
+    getSeries().then(response => {
+      let series = response.data.data.results;
+      console.log(series, "SERIES");
+      series.forEach(character => character.type = "serie");
+      setState((prevState)=> {
+        return{
+          ...prevState,
+          series: response.data.data.results
+        }
+      })
+    })
+    .catch(err => {
+      setState(prevState => {
+        return {
+          ...prevState
+        }
+      })
+    })
+  }
+
   return {
     getSeries,
     getSelectedSerie,
-    setSelectedSerie
+    setSelectedSerie,
+    setSeries
   }
 }
 
