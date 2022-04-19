@@ -51,10 +51,37 @@ const useComicsData = () => {
     })
   }
 
+  const setComics = (inputValue) => {
+    let milliseconds = Number(new Date());
+    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
+    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
+
+    const getComics = () => axios.get(`${process.env.REACT_APP_API_URL}/comics?titleStartsWith=${inputValue}&${apiParameters}`);
+    getComics().then(response => {
+      console.log(response);
+      let comics = response.data.data.results;
+      comics.forEach(comic => comic.type = "comics");
+      setState((prevState)=> {
+        return{
+          ...prevState,
+          comics: response.data.data.results
+        }
+      })
+    })
+    .catch(err => {
+      setState(prevState => {
+        return {
+          ...prevState
+        }
+      })
+    })
+  }
+
   return {
     getComics,
     getSelectedComic,
-    setSelectedComic
+    setSelectedComic,
+    setComics
   }
 }
 

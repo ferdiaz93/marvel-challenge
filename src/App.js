@@ -10,6 +10,7 @@ import ComicPage from './views/ComicPage';
 import StoryPage from './views/StoryPage';
 import SeriePage from './views/SeriePage';
 import CharactersPage from './views/CharactersPage';
+import ComicsPage from './views/ComicsPage';
 
   function App() {
 
@@ -21,7 +22,7 @@ import CharactersPage from './views/CharactersPage';
           <Route path="/" element={<HomePage />}></Route>
           <Route path={"characters"} element={<CharactersPage />}></Route>
           <Route path={"character/:character_id"} element={<CharacterPage />}></Route>
-          <Route path={"comics"} element={<ComicPage />}></Route>
+          <Route path={"comics"} element={<ComicsPage />}></Route>
           <Route path={"comic/:comic_id"} element={<ComicPage />}></Route>
           <Route path={"stories"} element={<StoryPage />}></Route>
           <Route path={"story/:story_id"} element={<StoryPage />}></Route>
