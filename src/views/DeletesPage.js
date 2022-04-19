@@ -6,11 +6,6 @@ import useCharactersData from '../hooks/useCharactersData';
 const DeletesPage = () => {
   const { getDeletedCharacters } = useCharactersData();
   const deletedCharacters = getDeletedCharacters();
-  console.log(deletedCharacters);
-
-  useEffect(() => {
-    console.log(deletedCharacters);
-  }, [])
 
   return (
     <>
