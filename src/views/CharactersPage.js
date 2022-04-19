@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import useCharactersData from '../hooks/useCharactersData'
+import useSearchData from '../hooks/useSearchData'
 import Card from '../components/Card';
+import useCharactersData from '../hooks/useCharactersData';
 
 
-const HomePage = () => {
-  const { getCharacters } = useCharactersData();
+const CharactersPage = () => {
+  const { getCharacters, setCharacters } = useCharactersData();
+  const { getInputSearchValue } = useSearchData();
   const characters = getCharacters();
+  const inputSearchValue = getInputSearchValue();
+
+  useEffect(() => {
+    if(inputSearchValue){
+      setCharacters(inputSearchValue);
+    }
+  },[inputSearchValue])
 
   return (
     <>
@@ -14,13 +23,13 @@ const HomePage = () => {
           <div className="characters-grid">
             {characters.map(character => {
               return (
-                <Card 
+                <Card
                   key={character.id}
                   id={character.id}
                   title={character.name}
                   description={character.description}
                   type={character.type}
-                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`}/>
+                  imageUrl={`${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`} />
               )
             })}
           </div>
@@ -30,4 +39,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage;
+export default CharactersPage;

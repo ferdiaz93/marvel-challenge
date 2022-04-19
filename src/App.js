@@ -9,22 +9,23 @@ import CharacterPage from './views/CharacterPage';
 import ComicPage from './views/ComicPage';
 import StoryPage from './views/StoryPage';
 import SeriePage from './views/SeriePage';
+import CharactersPage from './views/CharactersPage';
 
   function App() {
-    const [age, setAge] = React.useState('');
-    
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
+
   return (
     <BrowserRouter>
       <ConfiguratorProvider>
         <Search />
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path={"characters"} element={<CharactersPage />}></Route>
           <Route path={"character/:character_id"} element={<CharacterPage />}></Route>
+          <Route path={"comics"} element={<ComicPage />}></Route>
           <Route path={"comic/:comic_id"} element={<ComicPage />}></Route>
+          <Route path={"stories"} element={<StoryPage />}></Route>
           <Route path={"story/:story_id"} element={<StoryPage />}></Route>
+          <Route path={"series"} element={<SeriePage />}></Route>
           <Route path={"serie/:serie_id"} element={<SeriePage />}></Route>
           <Route path="*" element={<Navigate to="/" />}></Route>
         </Routes>

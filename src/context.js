@@ -12,6 +12,8 @@ const initialContext = {
   comics: [],
   stories: [],
   series: [],
+  inputSearchValue: "",
+  selectSearchValue: "characters",
 }
 
 const ConfiguratorContext = React.createContext();

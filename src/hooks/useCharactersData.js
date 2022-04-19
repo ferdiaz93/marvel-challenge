@@ -54,10 +54,37 @@ const useCharactersData = () => {
     })
   }
 
+  const setCharacters = (inputValue) => {
+    let milliseconds = Number(new Date());
+    let hash = md5(milliseconds + process.env.REACT_APP_PRIVATE_KEY + process.env.REACT_APP_PUBLIC_KEY);
+    let apiParameters = `ts=${milliseconds}&apikey=${process.env.REACT_APP_PUBLIC_KEY}&hash=${hash}`;
+
+    const getCharacters = () => axios.get(`${process.env.REACT_APP_API_URL}/characters?nameStartsWith=${inputValue}&${apiParameters}`);
+    getCharacters().then(response => {
+      console.log(response);
+      let characters = response.data.data.results;
+      characters.forEach(character => character.type = "character");
+      setState((prevState)=> {
+        return{
+          ...prevState,
+          characters: response.data.data.results
+        }
+      })
+    })
+    .catch(err => {
+      setState(prevState => {
+        return {
+          ...prevState
+        }
+      })
+    })
+  }
+
   return {
     getCharacters,
     getSelectedCharacter,
-    setSelectedCharacter
+    setSelectedCharacter,
+    setCharacters
   }
 }
 
