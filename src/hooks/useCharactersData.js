@@ -12,6 +12,7 @@ const useCharactersData = () => {
   const getCharacters = () => state.characters;
   const getSelectedCharacter = () => state.selectedCharacter;
   const getFavoritesCharacters = () => JSON.parse(localStorage.getItem('favorites_characters'));
+  const getDeletedCharacters = () => state.deletedCharacters;
 
   //setters
   const setSelectedCharacter = (id) => {
@@ -80,10 +81,15 @@ const useCharactersData = () => {
     localStorage.setItem('favorites_characters', JSON.stringify(favoritesSaved));
   }
   
-  const setRemovedCharacters = (character) => {
-    let removedCharacters = JSON.parse(localStorage.getItem('removed_characters'));
-    removedCharacters.push(character);
-    localStorage.setItem('removed_characters', JSON.stringify(removedCharacters));
+
+  const updateRemovedCharacters = () => {
+    let deletedCharacters = JSON.parse(localStorage.getItem('removed_characters'));
+    setState(prevState => {
+      return{
+        ...prevState,
+        deletedCharacters: [...deletedCharacters]
+      }
+    })
   }
 
   return {
@@ -93,7 +99,8 @@ const useCharactersData = () => {
     setCharacters,
     setFavoritesCharacters,
     getFavoritesCharacters,
-    setRemovedCharacters
+    getDeletedCharacters,
+    updateRemovedCharacters
   }
 }
 

@@ -4,6 +4,7 @@
 
 // components
 @import './components/card';
+@import './components/deletedcard';
 @import './components/search';
 
 //views
@@ -14,3 +15,4 @@
 @import './views/comicspage';
 @import './views/favoritespage';
 @import './views/seriespage';
+@import './views/deletespage';

@@ -9,6 +9,7 @@ const initialContext = {
   comics: [],
   stories: [],
   series: [],
+  deletedCharacters: [],
   inputSearchValue: "",
   selectSearchValue: "characters",
 }
@@ -30,6 +31,13 @@ const ConfiguratorProvider = ({ children }) => {
     }
     if(!localStorage.getItem("removed_characters")){
       localStorage.setItem('removed_characters', JSON.stringify([]));
+    }else{
+      setState(prevState=> {
+        return{
+          ...prevState,
+          deletedCharacters: JSON.parse(localStorage.getItem('removed_characters'))
+        }
+      })
     }
   }, [])
 

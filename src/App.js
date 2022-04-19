@@ -15,6 +15,7 @@ import CharactersPage from './views/CharactersPage';
 import ComicsPage from './views/ComicsPage';
 import SeriesPage from './views/SeriesPage';
 import FavoritesPage from './views/FavoritesPage';
+import DeletesPage from './views/DeletesPage';
 
   function App() {
     const darkTheme = createTheme({
@@ -35,6 +36,7 @@ import FavoritesPage from './views/FavoritesPage';
             </a>
             <Search />
             <a className="button favorite-button" href='/favorites'>See Favorites</a>
+            <a className="button favorite-button" href='/deletes'>See Deletes</a>
           </header>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
@@ -45,6 +47,7 @@ import FavoritesPage from './views/FavoritesPage';
             <Route path={"series"} element={<SeriesPage />}></Route>
             <Route path={"serie/:serie_id"} element={<SeriePage />}></Route>
             <Route path={"favorites"} element={<FavoritesPage />}></Route>
+            <Route path={"deletes"} element={<DeletesPage />}></Route>
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </ThemeProvider>

@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const CharacterPage = () => {
   const { character_id } = useParams();
-  const { getSelectedCharacter, setSelectedCharacter, setRemovedCharacters } = useCharactersData();
+  const { getSelectedCharacter, setSelectedCharacter, updateRemovedCharacters } = useCharactersData();
 
   const selectedCharacter = getSelectedCharacter();
   const navigate = useNavigate();
@@ -16,7 +16,10 @@ const CharacterPage = () => {
   }, [])
   
   const removeCharacter = () => {
-    setRemovedCharacters(selectedCharacter);
+    let deletedCharacters = JSON.parse(localStorage.getItem('removed_characters'));
+    deletedCharacters.push(selectedCharacter);
+    localStorage.setItem('removed_characters', JSON.stringify(deletedCharacters));
+    updateRemovedCharacters();
     navigate('/characters')
   }
 
